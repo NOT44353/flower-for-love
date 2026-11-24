@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌹 Flower For ลำดวน สิงห์ใหญ่ — 3D ASCII Rose Bouquet by Thanapat Pisavong (NOT44353)</title>
+  <meta name="author" content="Thanapat Pisavong (ธนภัทร พิศวงศ์ / NOT44353)" />
+  <meta name="description" content="ช่อดอกไม้ 3D ASCII ใต้แสงโคมแดง แด่ ลำดวน สิงห์ใหญ่ — ออกแบบและพัฒนาโดย Thanapat Pisavong (ธนภัทร พิศวงศ์ / น๊อต / NOT44353)" />
+  <meta property="og:title" content="🌹 แด่ ลำดวน สิงห์ใหญ่ — ส่งช่อดอกไม้ใต้แสงโคมแดงให้ลำดวนนะ" />
+  <meta property="og:description" content="3D ASCII Blooming Rose Bouquet & True-Color Portrait สำหรับ ลำดวน สิงห์ใหญ่ — Handcrafted with ♥ by Thanapat Pisavong (น๊อต / NOT44353)" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Navigation Bar -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon">🌹</div>
+        <div>
+          <div class="brand-title">Flower For Love · 3D ASCII Art</div>
+          <div class="brand-sub">Crafted by Thanapat Pisavong (NOT44353) · 3D Z-Buffer Rose &amp; Portrait</div>
+        </div>
+      </div>
+
+      <nav class="mode-tabs" aria-label="View modes">
+        <button class="tab-btn active" data-mode="duet" type="button">💝 คู่ช่อดอกไม้ + รูปเธอ</button>
+        <button class="tab-btn" data-mode="bouquet" type="button">🌹 ช่อดอกไม้ 3D เต็มจอ</button>
+        <button class="tab-btn" data-mode="reels" type="button">🎬 โหมดคลิป Reels</button>
+      </nav>
+
+      <div class="topbar-actions">
+        <button id="btnHeaderShower" class="btn btn-primary" type="button">✨ ส่งดอกไม้ &amp; โปรยกลีบ</button>
+        <button id="btnOpenCustomize" class="btn btn-gold" type="button">✏️ ปรับแต่งข้อความ / รูป</button>
+      </div>
+    </header>
+
+    <!-- VIEW 1: Duet (3D Blooming Rose Bouquet + Her Glowing ASCII Portrait) -->
+    <section id="view-duet" class="stage-view active">
+      <div class="duet-grid">
+        <!-- Left: 3D ASCII Rose Bouquet -->
+        <article class="terminal-card">
+          <div class="terminal-header">
+            <div style="display:flex;align-items:center;">
+              <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+              <span class="term-title">rose_bouquet_3d.py — Blooming Z-Buffer</span>
+            </div>
+            <span id="hudBouquet" class="term-meta">96×50 · 60 fps</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="bouquetCanvas" class="bouquet-canvas"></canvas>
+            <div class="canvas-hint">ลากบนช่อดอกไม้เพื่อหมุน 3D</div>
+          </div>
+          <div class="stage-controls">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button id="btnPlay" class="mini-btn" type="button">⏸ พักไว้ก่อน</button>
+              <button id="btnLanterns" class="mini-btn" type="button">🏮 โคมแดง: เปิด</button>
+              <button id="btnResetView" class="mini-btn" type="button">รีเซ็ตมุม</button>
+            </div>
+            <label class="slider-group">
+              <span>ความเร็ว</span>
+              <input id="speedSlider" type="range" min="0.2" max="2.2" step="0.1" value="1.0" />
+              <span id="speedVal" class="slider-val">1.0x</span>
+            </label>
+          </div>
+        </article>
+
+        <!-- Right: Girlfriend's True-Color ASCII Portrait -->
+        <article class="terminal-card">
+          <div class="terminal-header">
+            <div style="display:flex;align-items:center;">
+              <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+              <span class="term-title">lamduan_portrait_ascii.py — True-Color</span>
+            </div>
+            <span class="term-meta">96×76 · 24-bit RGB</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="portraitCanvas"></canvas>
+          </div>
+          <div class="stage-controls">
+            <button id="btnReplayPortrait" class="mini-btn" type="button">✨ เล่นเอฟเฟกต์เผยภาพ</button>
+            <label class="slider-group">
+              <span>ASCII</span>
+              <input id="blendSlider" type="range" min="0" max="100" step="1" value="88" />
+              <span id="blendVal" class="slider-val">88%</span>
+            </label>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- VIEW 2: Full-Width 3D Blooming Rose Bouquet -->
+    <section id="view-bouquet" class="stage-view">
+      <article class="terminal-card">
+        <div class="terminal-header">
+          <div style="display:flex;align-items:center;">
+            <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+            <span class="term-title">flower_ascii.py --mode bouquet</span>
+          </div>
+          <span id="hudSolo" class="term-meta">124×48 · 60 fps</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="bouquetSoloCanvas" class="bouquet-canvas"></canvas>
+          <div class="canvas-hint">ลากเพื่อหมุนช่อดอกไม้ 360°</div>
+        </div>
+      </article>
+    </section>
+
+    <!-- VIEW 3: TikTok / Reels Split Code Mode -->
+    <section id="view-reels" class="stage-view">
+      <div class="reels-layout">
+        <div class="reels-phone-frame">
+          <canvas id="reelsCanvas"></canvas>
+        </div>
+        <aside class="reels-sidebar">
+          <h3>🎬 โหมดคลิปแบบ TikTok / Reels</h3>
+          <p>
+            จัดเลย์เอาต์ 9:16 เหมือนคลิปตัวอย่าง: ด้านบนแสดงช่อดอกไม้ 3D ASCII คู่กับภาพ True-Color ASCII ของแฟน
+            ส่วนด้านล่างโชว์โค้ด <code>flower_ascii.py</code> เลื่อนอัตโนมัติพร้อมเลขเฟรม
+          </p>
+          <div id="hudReels" class="reels-stat">Frame 001/300 · 60 fps</div>
+          <button id="btnRecordReels" class="btn btn-primary" type="button" style="justify-content:center;">
+            ⏺ อัดคลิป Reels (10 วินาที)
+          </button>
+          <p style="font-size:12px;">
+            เมื่ออัดครบ 10 วินาที เบราว์เซอร์จะดาวน์โหลดไฟล์ <code>flower-for-love-reels.webm</code> ให้อัตโนมัติ
+            (หรือกดปุ่มเดิมเพื่อหยุดอัดก่อนครบได้)
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Romantic Love Card -->
+    <section class="love-card" aria-label="Romantic message">
+      <div class="love-copy">
+        <div id="loveBadge" class="love-badge">3D ASCII ROSE BOUQUET · FOR ลำดวน สิงห์ใหญ่</div>
+        <div id="loveRecipient" class="love-recipient">แด่ ลำดวน สิงห์ใหญ่ ♥</div>
+        <h1 id="loveHeadline" class="love-headline">ส่งช่อดอกไม้ใต้แสงโคมแดงให้ลำดวนนะ</h1>
+        <p id="loveMessage" class="love-message"></p>
+        <div id="loveSender" class="love-sender"></div>
+      </div>
+      <div class="love-cta">
+        <button id="btnSendFlowers" class="btn btn-primary" type="button" style="justify-content:center;">
+          🌹 มอบช่อดอกไม้ให้เธออีกครั้ง
+        </button>
+        <button id="btnCardCustomize" class="btn" type="button" style="justify-content:center;">
+          ✏️ แก้ชื่อแฟน / ข้อความบอกรัก
+        </button>
+      </div>
+    </section>
+
+    <!-- Creator Credit Footer (from NOT44353 Portfolio) -->
+    <footer class="creator-footer" aria-label="Creator credit">
+      <div class="creator-profile">
+        <img
+          id="creatorAvatar"
+          class="creator-avatar"
+          src="https://not44353.vercel.app/profile2.jpg"
+          alt="Thanapat Pisavong (NOT44353)"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"
+        />
+        <div class="creator-avatar-fallback" aria-hidden="true">NP</div>
+        <div class="creator-info">
+          <div class="creator-kicker">HANDCRAFTED WITH ♥ BY</div>
+          <div id="creatorName" class="creator-name">Thanapat Pisavong (ธนภัทร พิศวงศ์ · น๊อต)</div>
+          <div id="creatorRole" class="creator-role">Full Stack Developer &amp; Cloud Systems Engineer · @NOT44353</div>
+        </div>
+      </div>
+      <div class="creator-links">
+        <a id="linkPortfolio" class="creator-link primary" href="https://not44353.vercel.app/" target="_blank" rel="noopener noreferrer">🌐 Portfolio</a>
+        <a id="linkGithub" class="creator-link" href="https://github.com/NOT44353" target="_blank" rel="noopener noreferrer">GitHub @NOT44353</a>
+        <a id="linkLinkedin" class="creator-link" href="https://www.linkedin.com/in/thanapat-pisavong-0a8a80367" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a id="linkFacebook" class="creator-link" href="https://www.facebook.com/thanaput.pisawong" target="_blank" rel="noopener noreferrer">Facebook</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Customization Modal -->
+  <div id="customModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="modalTitle">✏️ ปรับแต่งการ์ดดอกไม้ให้แฟน</h2>
+        <button id="btnCloseModal" class="mini-btn" type="button">✕ ปิด</button>
+      </div>
+      <div class="field">
+        <label for="inRecipient">คำขึ้นต้น / ชื่อเรียกแฟน</label>
+        <input id="inRecipient" type="text" placeholder="เช่น แด่คนเก่งของเค้า" />
+      </div>
+      <div class="field">
+        <label for="inHeadline">หัวข้อการ์ด</label>
+        <input id="inHeadline" type="text" placeholder="เช่น ส่งช่อดอกไม้ให้เธอนะ" />
+      </div>
+      <div class="field">
+        <label for="inMessage">ข้อความบอกรัก</label>
+        <textarea id="inMessage" placeholder="เขียนข้อความที่อยากส่งให้แฟน..."></textarea>
+      </div>
+      <div class="field">
+        <label for="inSender">ลงชื่อผู้ส่ง</label>
+        <input id="inSender" type="text" placeholder="เช่น จากคนที่รักเธอที่สุด" />
+      </div>
+      <div class="field">
+        <label>เปลี่ยนรูปภาพสดๆ ในเบราว์เซอร์</label>
+        <div class="file-drop">
+          <span id="photoStatus" style="color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">ใช้รูป assets/girlfriend.jpg</span>
+          <label class="mini-btn" style="cursor:pointer;flex-shrink:0;">
+            เลือกรูปใหม่
+            <input id="inPhoto" type="file" accept="image/*" hidden />
+          </label>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="btnSaveCustom" class="btn btn-primary" type="button">💾 บันทึก &amp; โปรยดอกไม้</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load offline-safe data & modular engines -->
+  <script src="config.js"></script>
+  <script src="js/portrait-data.js"></script>
+  <script src="js/flower-3d.js"></script>
+  <script src="js/portrait-ascii.js"></script>
+  <script src="js/code-panel.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
